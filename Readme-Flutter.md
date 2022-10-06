@@ -4,7 +4,13 @@ flutter create [project_name]
 ```
 <br>
 
-# Basic main.dart
+# Add a new Dart / Flutter package
+- go to https://pub.dev
+
+<br>
+
+
+# Basic Stateless Widget
 ```dart
 void main() {
   runApp(const App());
@@ -27,6 +33,50 @@ class App extends StatelessWidget {
   }
 }
 ```
+<br>
+
+# Basic Stateful Widget
+- Stateful Widget contains:
+  - A createState() method
+  - An private state class created internally
+
+- Set State
+  - Use setState() to update the state in the State class
+  - When setState() is called, the build() method is called to rebuild the UI.
+
+```dart
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Title',
+      home: HomePage(),
+    );
+  }
+}
+
+// Stateful Widget
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
+}
+```
+
 <br>
 
 # Loading images
@@ -81,6 +131,107 @@ flutter:
 # Align
 - Set relative alignment to the screen or another widget
 
+<br>
+
+# Center
+- Put a widget in the center of the screen (or of parent)
+
+
+# AppBar
+ - Bar at the top of the screen
+
+<br>
+
+# ListView and ListTile
+- Scollable list and pre-built tile for the ListView
+- ListTile has title, subtitle, trailing, etc. properties
+```dart
+/***
+Building a ListView using ListView constructor
+*/
+return ListView(
+      children: [
+        ListTile(
+          title: Text(
+            "Do Laundry",
+            style: TextStyle(decoration: TextDecoration.lineThrough),
+          ),
+          subtitle: Text(DateTime.now().toString()),
+          trailing: Icon(
+            Icons.check_box_outlined,
+            color: Colors.red,
+          ),
+        ),
+      ],
+    );
+```
+
+```dart
+/***
+Building a ListView using the ListView.builder()
+*/
+return ListView.builder(
+  itemCount: tasks.length,
+  itemBuilder: (BuildContext context, int index) {
+    var task = Task.fromMap(tasks[index]);
+    return ListTile(
+      title: Text(task.content),
+      ),
+      subtitle: Text(task.timestamp.toString()),
+      trailing: Icon(
+        Icons.check_box_outline_blank_outlined),
+        color: Colors.red,
+      ),
+    );
+  },
+);
+```
+<br>
+
+# Floating Action Button
+- Defined in Scaffold (property: floatingActionButton)
+- Use child property to add an icon
+
+<br>
+
+# Show Dialog
+```dart
+showDialog(
+  context: context,
+  builder: (ctx) {
+    return AlertDialog(
+      title: const Text("Add New Task!"),
+      content: TextField(
+        onSubmitted: (value) {
+          // ... save to db ...
+          // db.save(_newTaskContent);
+          Navigator.pop(context); // Closes the dialog
+        },
+        onChanged: (value) {
+          _newTaskContent = value;
+        },
+      ),
+    );
+  },
+);
+```
+ <br>
+
+# FutureBuilder
+- Takes a Future and a builder function
+- When the Future is resolves, the builder function is called which returns a widget
+```dart
+return FutureBuilder(
+  future: Hive.openBox("tasks"),
+  builder: (ctx, snapshot) {
+    if (snapshot.hasData) {
+      return _tasksList(snapshot.data);
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
+  },
+);
+```
 <br>
 
 # Get Device's height and width

@@ -283,6 +283,27 @@ class SlowCar extends Vehicle {
 ```
 <br>
 
+# Factory constructor
+- It's like using a static method to construct an object instance
+```dart
+class Dog {
+
+  factory Dog.createDog(...) {
+    return Doberman();
+  }
+}
+
+class Doberman extends Dog {
+  ...
+}
+
+class Labrador extends Dog {
+  ...
+}
+```
+
+<br>
+
 # Async / Await
 - An Async function always runs in the background (asynchronously)
 - An Async function always return a Future (need async keyword)
@@ -320,6 +341,78 @@ Delay 2 done
 After futureFunction2
 Delay 1 done
 
+```
+<br>
+
+# Optional Chaining(?) and Non-null Assertion(!)
+```dart
+class Person {
+  late String name;
+  PersonProperty? personProperty;
+  
+}
+
+class PersonProperty {
+  String? optionalProperty;
+}
+
+
+void main() {
+
+  /* 
+  Conditional Property Access 
+  Similar to "Optional chaining operator" in JS 
+  */
+  Person person = Person();
+  print(person.personProperty?.optionalProperty); // null
+  
+  Person? person2;
+  // person2 can be null. Accessing person2.personProperty
+  // can cause an exception. With person2?.personProperty,
+  // it would return null, instead of an exception being 
+  // thrown.
+  print(person2?.personProperty?.optionalProperty); // null
+    
+  /*
+  Non-null assertion operator
+  Similar to Typescript's
+  */
+  // person2 can be null but we use person2! to 
+  // tell the compiler that we are SURE that person2 
+  // is not null.
+  print(person2!.personProperty?.optionalProperty); // uncaught exception
+
+  print(person.personProperty!.optionalProperty); // uncaught exception
+}
+
+```
+<br>
+
+# Cascades (..) and null-shorting cascade (?..)
+- myObject..someMethod()
+  - it invokes someMethod() on myObject
+  - but return a reference to myObject, not result of someMethod()
+  
+```dart
+/* 
+Using cascades, you can chain together operations that would otherwise require separate statements. For example, consider the following code, which uses the conditional member access operator (?.) to read properties of button if it isn’t null:
+*/
+
+var button = querySelector('#confirm');
+button?.text = 'Confirm';
+button?.classes.add('important');
+button?.onClick.listen((e) => window.alert('Confirmed!'));
+button?.scrollIntoView();
+
+/*
+To instead use cascades, you can start with the null-shorting cascade (?..), which guarantees that none of the cascade operations are attempted on a null object. Using cascades shortens the code and makes the button variable unnecessary:
+*/
+
+querySelector('#confirm')
+  ?..text = 'Confirm'
+  ..classes.add('important')
+  ..onClick.listen((e) => window.alert('Confirmed!'))
+  ..scrollIntoView();
 ```
 <br>
 
