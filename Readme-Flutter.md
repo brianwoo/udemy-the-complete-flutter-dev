@@ -98,7 +98,7 @@ flutter:
 - Occupies the entire area of its parent (when there is no child)
 - But a Container only occupies the size of the child (when there is a child)
 - Only one child
-- Change its styling using docoration property
+- Change its styling using decoration property
 
 <br>
 
@@ -234,6 +234,11 @@ return FutureBuilder(
 ```
 <br>
 
+# GestureDector
+- To detect user input (e.g. property onTap, onDoubleTap, etc)
+
+<br>
+
 # Get Device's height and width
 ```dart
 _deviceHeight = MediaQuery.of(context).size.height;
@@ -242,3 +247,121 @@ _deviceWidth = MediaQuery.of(context).size.width;
 
 <br>
 
+# Animation
+- Different ways to do Animations:
+  - AnimatedWidget (Animated*)
+  - Tweens (short for in-between) + TweenAnimationBuilder
+  - Animation Controllers
+
+```dart
+/** 
+AnimatedWidget
+*/
+Widget _circularAnimationButton() {
+  return Center(
+    child: GestureDetector(
+      onTap: () {
+        setState(() {
+          _buttonRadius += _buttonRadius == 200 ? -100 : 100;
+        });
+      },
+      child: AnimatedContainer(
+        height: _buttonRadius,
+        width: _buttonRadius,
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(_buttonRadius),
+        ),
+        duration: Duration(seconds: 2),
+        curve: Curves.bounceInOut,
+        child: Center(child: Text("Animated Widget")),
+      ),
+    ),
+  );
+}
+```
+
+```dart
+/**
+Tween
+*/
+
+// Tween goes between 0 (nothing) -> 1 (full)
+final Tween<double> _backgroundScale = Tween(begin: 0.0, end: 1.0);
+
+Widget _pageBackground() {
+  return TweenAnimationBuilder(
+    curve: Curves.easeInOutCubicEmphasized,
+    builder: (BuildContext context, double value, Widget? child) {
+      return Transform.scale(
+        scale: value,
+        child: child,
+      );
+    },
+    duration: const Duration(seconds: 1),
+    tween: _backgroundScale,
+    child: Container(color: Colors.blueAccent),
+  );
+}
+```
+
+```dart
+/**
+Animation Controller
+*/
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+
+  AnimationController? _starAnimController;
+
+  @override
+  void initState() {
+    super.initState();
+    _starAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    );
+    _starAnimController!.repeat();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _starIcon(),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _starIcon() {
+    return AnimatedBuilder(
+      animation: _starAnimController!.view,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.rotate(
+          angle: _starAnimController!.value * 2 * pi, // in radian
+          child: child,
+        );
+      },
+      child: const Icon(
+        Icons.star,
+        size: 100,
+        color: Colors.white,
+      ),
+    );
+  }
+}
+```
