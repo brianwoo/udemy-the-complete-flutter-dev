@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
 
 <br>
 
-# Loading images
+# Loading local images
 - Use AssetImage class in code
 - Create an assets directory for images (e.g. assets/images) under the root of the project
 - Add to pubspec.yaml
@@ -93,6 +93,22 @@ flutter:
     - assets/images/ # alternately just specify the dir
 ```
 <br>
+
+# Loading network images
+- Use NetworkImage()
+```dart
+Widget _coinImageWidget(String imgUrl) {
+  return Container(
+    height: _deviceHeight! * 0.15,
+    width: _deviceWidth! * 0.15,
+    decoration: BoxDecoration(
+      image: DecorationImage(image: NetworkImage(imgUrl)),
+    ),
+  );
+}
+```
+<br>
+
 
 # Container
 - Occupies the entire area of its parent (when there is no child)
@@ -218,6 +234,7 @@ showDialog(
  <br>
 
 # FutureBuilder
+- Is a Widget
 - Takes a Future and a builder function
 - When the Future is resolves, the builder function is called which returns a widget
 ```dart
@@ -239,12 +256,37 @@ return FutureBuilder(
 
 <br>
 
+# Go to another page
+- Use Navigator.push()
+
+```dart
+GestureDetector(
+  onDoubleTap: () => Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => DetailsPage(),
+    ),
+  ),
+)
+```
+
+<br>
+
 # Get Device's height and width
 ```dart
 _deviceHeight = MediaQuery.of(context).size.height;
 _deviceWidth = MediaQuery.of(context).size.width;
 ```
+<br>
 
+# Native Code - ensureInitialized()
+- Use WidgetsFlutterBinding.ensureInitialized() if the app needs to make native calls
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
+```
 <br>
 
 # Animation

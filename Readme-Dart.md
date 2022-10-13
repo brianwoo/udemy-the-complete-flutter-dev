@@ -16,7 +16,7 @@ void main() {
 <br>
 
 # Data Types
-- Numbers - int & double (floating point value), ** NO long and float**
+- Numbers - int, double & num (num = int or double) , ** NO long and float**
 - Boolean - bool
 - Strings - a string is enclosed in single or double quotes
 - Lists   - List, same as array in other prog langs
