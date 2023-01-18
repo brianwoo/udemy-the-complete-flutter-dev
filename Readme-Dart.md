@@ -283,6 +283,60 @@ class SlowCar extends Vehicle {
 ```
 <br>
 
+# Mixin
+- Inheritence uses 'extends', Mixin uses 'with'
+- Inheritence extends 1 class, Mixin uses many
+- Mixin 'with' order matters
+- A class is allowed to be 'with' a class or a mixin
+
+```dart
+// Agility1 is a MIXIN
+mixin Agility1 {
+  int speed = 10;
+  void sitDown() {
+    print("sit down 1");
+  }
+}
+
+// Agility2 is a MIXIN
+mixin Agility2 {
+  int speed = 10;
+  void sitDown() {
+    print("sit down 2");
+  }
+}
+
+// Agility0 is a CLASS
+class Agility0 {
+    void sitDown() {
+    print("sit down 0");
+  }
+}
+
+class Mammal {
+  void breathe() {
+    print("breathe in and out");
+  }
+}
+
+class Person extends Mammal with Agility0, Agility1, Agility2 {
+  String name;
+  int age;
+  
+  Person(this.name, this.age);
+}
+
+void main() {
+  Person person = Person('John', 23);
+  person.breathe();
+  person.sitDown();  // from Agility2.sitDown()
+}
+
+// OUTPUT:
+// breathe in and out
+// sit down 2
+```
+
 # Factory constructor
 - It's like using a static method to construct an object instance
 ```dart

@@ -109,12 +109,35 @@ Widget _coinImageWidget(String imgUrl) {
 ```
 <br>
 
+# Loading an additional font
+- Add to MaterialApp's ThemeData (fontFamily) - Global font setup
+- Create an assets directory for images (e.g. assets/fonts) under the root of the project
+- Add to pubspec.yaml
+
+```yaml
+# In Code:
+return MaterialApp(
+  title: 'Frivia',
+  theme: ThemeData(
+    fontFamily: 'ArchitectsDaughter',
+  ),
+  home: const MyHomePage(title: 'Flutter Demo Home Page'),
+);
+
+# pubspec.yaml
+fonts:
+  - family: ArchitectsDaughter
+    fonts:
+      - asset: assets/fonts/ArchitectsDaughter-Regular.ttf
+```
+<br>
 
 # Container
 - Occupies the entire area of its parent (when there is no child)
 - But a Container only occupies the size of the child (when there is a child)
 - Only one child
 - Change its styling using decoration property
+- Use double.infinity on width / height to maximize the size
 
 <br>
 
@@ -124,7 +147,9 @@ Widget _coinImageWidget(String imgUrl) {
   - properties: to config how widgets are aligned vertically,
 - MainAxisSize
   - properties: to config how much space the column takes from parent.
+  - by default, it takes up all the available space across the main axis.
 - CrossAxisAlignment:  to config how widgets are aligned horizontally.
+  - by default, it does NOT takes up all the available space across the cross axis. Use Sizedbox.expand() to take up the cross space
 
 <br>
 
@@ -134,8 +159,32 @@ Widget _coinImageWidget(String imgUrl) {
   - properties: to config how widgets are aligned horizontally,
 - MainAxisSize
   - properties: to config how much space the row takes from parent.
+  - by default, it takes up all the available space across the main axis.
 - CrossAxisAlignment:  to config how widgets are aligned vertically.
+  - by default, it does NOT takes up all the available space across the cross axis. Use Sizedbox.expand() to take up the cross space
 
+<br>
+
+# SizedBox
+- Put an invisible box to occupy empty space
+- Handy to add extra space between column / row items
+```dart
+Column(
+  children: [
+    _trueButton(),
+    SizedBox(height: _deviceHeight! * 0.01),
+    _falseButton(),
+  ],
+),
+```
+<br>
+
+# Spacer
+- Takes up all the space between 2 widgets
+
+<br>
+
+# FittedBox
 <br>
 
 # Stack
@@ -203,6 +252,12 @@ return ListView.builder(
 );
 ```
 <br>
+
+# SingleChildScrollView
+- There are occasion where not all the widget in a Column can fit on the screen
+- Wrap a Column with SingleChildScrollView scrollable
+- Similarly, wrap a Row with scrollDirection: Axis.horizontal
+- https://www.youtube.com/watch?v=neAn35cY8y0
 
 # Floating Action Button
 - Defined in Scaffold (property: floatingActionButton)
@@ -287,6 +342,90 @@ void main() {
   runApp(const MyApp());
 }
 ```
+<br>
+
+# Provider
+- State management - a mechanism to expose values
+- A provider's child widgets can get and set global values
+- One child widget can update a value (call notifyListeners()) and another widget (listening) will then see the changed value.
+- 3 Steps:
+  1. Define a Provider: have a class extends ChangeNotifier
+  2. In a Parent's build(), have this ChangeNotifierProvider wrap around the child listener widgets (Remember: 1 widget above the listener widget)
+    - 2a. Alternatively, use ChangeNotifierProvider.value() for already created Provider (e.g. nested providers). https://stackoverflow.com/questions/57335980/changenotifierprovider-vs-changenotifierprovider-value
+  3. child listener widgets can now have access to provider to get/set values
+```dart
+// *** Step 1
+class GamePageProvider extends ChangeNotifier {
+
+  void setQuestions(List<Question> questions) {
+    _questions = questions
+    notifyListeners();  // notify all the subscribers for state change.
+  }
+
+  List<Question> getQuestions() {
+    return _questions;
+  }
+}
+
+// *** Step 2
+class GamePage extends StatelessWidget {
+  GamePageProvider? _pageProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => GamePageProvider(),
+      child: Listener1(), // child widgets have access to provider
+    );
+  }
+
+  // Alternatively, use ChangeNotifierProvider.value()
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: gameItem[i],
+      child: Listener2(), // child widgets have access to provider
+    );
+  }
+  
+  // *** Step 3
+  class Listener1 extends StatelessWidget {
+    
+    @override
+    Widget build(BuildContext context) {
+      final questions = Provider.of<GamePageProvider>(context).getQuestions();
+      return ListQuestionsWidget(questions);
+
+      // Alternatively, use Consumer - advantage: refresh only the enclosing widget      
+    }
+
+    void _setQuestions() {
+      Provider.of<GamePageProvider>(context).setQuestions(questions);
+    }
+  }
+  
+```
+
+# Consumer
+- Same functionality as Provider, but when data refreshes, it only re-run the Consumer builder code.
+- No listen: false functionality like in Provider.of()
+
+```dart
+  Consumer<CartProvider>(
+    // this iconButton passed into the child will be passed
+    // in to the builder method below (as a 3rd arg.)
+    // In this case, the Badge needs a child widget
+    child: IconButton(
+      icon: Icon(Icons.shopping_basket),
+      onPressed: () {},
+    ),
+    builder: (context, cart, iconBtn) => Badge(
+      value: cart.itemCount.toString(),
+      child: iconBtn!,
+    ),
+```
+
+
 <br>
 
 # Animation
