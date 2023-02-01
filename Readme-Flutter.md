@@ -261,6 +261,7 @@ return ListView.builder(
 
 # Floating Action Button
 - Defined in Scaffold (property: floatingActionButton)
+
 - Use child property to add an icon
 
 <br>
@@ -287,24 +288,6 @@ showDialog(
 );
 ```
  <br>
-
-# FutureBuilder
-- Is a Widget
-- Takes a Future and a builder function
-- When the Future is resolves, the builder function is called which returns a widget
-```dart
-return FutureBuilder(
-  future: Hive.openBox("tasks"),
-  builder: (ctx, snapshot) {
-    if (snapshot.hasData) {
-      return _tasksList(snapshot.data);
-    } else {
-      return const Center(child: CircularProgressIndicator());
-    }
-  },
-);
-```
-<br>
 
 # GestureDector
 - To detect user input (e.g. property onTap, onDoubleTap, etc)
@@ -346,12 +329,17 @@ void main() {
 
 # Provider
 - State management - a mechanism to expose values
+
 - A provider's child widgets can get and set global values
+
 - One child widget can update a value (call notifyListeners()) and another widget (listening) will then see the changed value.
+
 - 3 Steps:
   1. Define a Provider: have a class extends ChangeNotifier
+
   2. In a Parent's build(), have this ChangeNotifierProvider wrap around the child listener widgets (Remember: 1 widget above the listener widget)
     - 2a. Alternatively, use ChangeNotifierProvider.value() for already created Provider (e.g. nested providers). https://stackoverflow.com/questions/57335980/changenotifierprovider-vs-changenotifierprovider-value
+
   3. child listener widgets can now have access to provider to get/set values
 ```dart
 // *** Step 1
@@ -408,6 +396,7 @@ class GamePage extends StatelessWidget {
 
 # Consumer
 - Same functionality as Provider, but when data refreshes, it only re-run the Consumer builder code.
+
 - No listen: false functionality like in Provider.of()
 
 ```dart
@@ -424,8 +413,68 @@ class GamePage extends StatelessWidget {
       child: iconBtn!,
     ),
 ```
+<br>
 
+# Future & Stream
+- A Future represents a computation that doesn’t complete immediately. Where a normal function returns the result, an asynchronous function returns a Future, which will eventually contain the result. The future will tell you when the result is ready.
 
+- A stream is a sequence of asynchronous events. It is like an asynchronous Iterable-where, instead of getting the next event when you ask for it, the stream tells you that there is an event when it is ready.
+<br>
+<br>
+
+# FutureBuilder & StreamBuilder
+- Both StreamBuilder and FutureBuilder have the same behavior: They listen to changes on their respective object. And trigger a new build when they are notified of a new value.
+
+- FutureBuilder is used for one time response, like taking an image from Camera, getting data once from native platform (like fetching device battery), getting file reference, making an http request etc.
+
+- StreamBuilder is used for fetching some data more than once, like listening for location update, playing a music, stopwatch, etc.
+```dart
+  // Constructing FutureBuilder
+  Widget _buildFutureBuilder() {
+    return Center(
+      child: FutureBuilder<int>(
+        future: _calculateSquare(10),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done)
+            return Text("Square = ${snapshot.data}");
+
+          return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+
+  // used by FutureBuilder
+  Future<int> _calculateSquare(int num) async {
+    await Future.delayed(Duration(seconds: 5));
+    return num * num;
+  }
+```
+
+```dart
+  // Constructing StreamBuilder
+  Widget _buildStreamBuilder() {
+    return Center(
+      child: StreamBuilder<int>(
+        stream: _stopwatch(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active)
+            return Text("Stopwatch = ${snapshot.data}");
+
+          return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+
+  // used by StreamBuilder
+  Stream<int> _stopwatch() async* {
+    while (true) {
+      await Future.delayed(Duration(seconds: 1));
+      yield _count++;
+    }
+  }
+```
 <br>
 
 # Animation
@@ -545,4 +594,11 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+```
+<br>
+
+# Native 
+```dart
+// In main():
+WidgetsFlutterBinding.ensureInitialized();
 ```
