@@ -261,7 +261,6 @@ return ListView.builder(
 
 # Floating Action Button
 - Defined in Scaffold (property: floatingActionButton)
-
 - Use child property to add an icon
 
 <br>
