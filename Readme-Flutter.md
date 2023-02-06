@@ -137,7 +137,9 @@ fonts:
 - But a Container only occupies the size of the child (when there is a child)
 - Only one child
 - Change its styling using decoration property
-- Use double.infinity on width / height to maximize the size
+- Ways to get a Container to use all the space
+  - Use double.infinity on width / height to maximize the size
+  - Use Expanded()
 
 <br>
 
