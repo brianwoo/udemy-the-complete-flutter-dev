@@ -598,6 +598,93 @@ class _HomePageState extends State<HomePage>
 ```
 <br>
 
+# Isolate - Thread Support in Dart
+- A Isolate has its own memory and not shared with another Isolate
+- Isolate can communicate with another Isolate by SendPort/ReceivePort
+- A SendPort is created from a ReceivePort
+- Isolate.kill() can kill the isolate
+- Cannot send Isolate via SendPort.send()
+```dart
+void main(List<String> args) {
+  _createIsolate();
+}
+
+//***********************
+// Main thread - also an Isolate
+//***********************
+Future _createIsolate() async {
+  // Create an isolate
+  ReceivePort rp = ReceivePort();
+  Isolate.spawn(isolateFunc, rp.sendPort);
+
+  // Get a SendPort from child
+  // (so we send data in both dir)
+  SendPort childSendPort = await rp.first;
+
+  // Data port
+  ReceivePort responsePort = ReceivePort();
+  childSendPort.send([
+    "random-data-api.com",
+    "/api/v2/users",
+    responsePort.sendPort,
+  ]);
+
+  final resp = await responsePort.first;
+  print(resp['email']);
+
+  return null;
+}
+
+//***********************
+// Child Isolate
+//***********************
+void isolateFunc(SendPort mainSendPort) async {
+  // Create a SendPort for the main Isolate
+  // (so we send data in both dir)
+  ReceivePort childReceivePort = ReceivePort();
+  mainSendPort.send(childReceivePort.sendPort);
+
+  await for (var msg in childReceivePort) {
+    String url = msg[0];
+    String path = msg[1];
+    SendPort replyPort = msg[2];
+
+    Uri uri = Uri.https(url, path);
+    final resp = await http.get(uri);
+    replyPort.send(jsonDecode(resp.body));
+  }
+}
+```
+<br>
+
+# Compute Function - a Simplified Isolate
+- Only works in Flutter, not Dart
+- Callback function needs to be any of the following:
+  - a top-level function
+  - static method
+  - closure
+```dart
+  Future<String> _startComputeFunc() async {
+    String result = await compute(
+      _longRunningFunc,
+      {
+        "host": "randomuser.me",
+        "path": "/api",
+      },
+    );
+    return result;
+  }
+
+  // static func as callback
+  static Future<String> _longRunningFunc(Map<String, String> endpoint) async {
+    final uri = Uri.https(endpoint['host']!, endpoint['path']!);
+    final response = await http.get(uri);
+    return jsonDecode(response.body)['results'][0]['email'];
+  }
+
+  // call _startComputeFunc() in a FutureBuilder()...
+```
+
 # Native 
 ```dart
 // In main():
