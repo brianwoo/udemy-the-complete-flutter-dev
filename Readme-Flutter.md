@@ -205,6 +205,14 @@ Column(
 - Put a widget in the center of the screen (or of parent)
 - Center takes up entire area of its parent
 
+# Button
+- To customize the button style, use styleFrom()
+  
+```dart
+ElevatedButton(onPressed: () {}, child: Text("Answer 1"), ElevatedButton.styleForm(...)),
+```
+
+<br>
 
 # AppBar
  - Bar at the top of the screen
