@@ -312,6 +312,14 @@ GestureDetector(
 
 <br>
 
+# initState
+1. SomeObject() - Class initialization code
+2. SomeObject constructor executes - instance vars and methods are created
+3. SomeObject was created and in memory
+4. Flutter calls initState()
+   
+<br>
+
 # Get Device's height and width
 ```dart
 _deviceHeight = MediaQuery.of(context).size.height;
