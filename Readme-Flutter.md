@@ -168,6 +168,7 @@ fonts:
 <br>
 
 # SizedBox
+- SizedBox covers the total size of the enclosed components
 - Put an invisible box to occupy empty space
 - Handy to add extra space between column / row items
 ```dart
