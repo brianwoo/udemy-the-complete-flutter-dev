@@ -205,6 +205,8 @@ Column(
 - Put a widget in the center of the screen (or of parent)
 - Center takes up entire area of its parent
 
+<br>
+
 # Button
 - To customize the button style, use styleFrom()
   
