@@ -202,6 +202,7 @@ Column(
 
 # Center
 - Put a widget in the center of the screen (or of parent)
+- Center takes up entire area of its parent
 
 
 # AppBar
