@@ -278,6 +278,20 @@ return ListView.builder(
 - Wrap a Column with SingleChildScrollView scrollable
 - Similarly, wrap a Row with scrollDirection: Axis.horizontal
 - https://www.youtube.com/watch?v=neAn35cY8y0
+```dart
+SizedBox(
+  height: 300,
+  SingleChildScrollView(
+    child: Column(
+      children: [
+        .....
+      ],
+    ),
+  ),
+),
+```
+
+<br>
 
 # Floating Action Button
 - Defined in Scaffold (property: floatingActionButton)
