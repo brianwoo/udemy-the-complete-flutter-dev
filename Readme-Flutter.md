@@ -143,6 +143,12 @@ fonts:
 
 <br>
 
+# Expanded
+- Creates a widget that expands a child of a Row, Column or Flex so that the child fills the available space along the flex widget's MAIN axis
+- Useful when there is an overflow in using Row and Column
+
+<br>
+
 # Column
 - Main Axis (vertical, from top to bottom)
 - MainAxisAlignment
