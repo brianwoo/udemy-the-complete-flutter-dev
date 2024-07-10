@@ -230,6 +230,14 @@ ElevatedButton(onPressed: () {}, child: Text("Answer 1"), ElevatedButton.styleFo
 
 <br>
 
+# Handling Input (TextField, etc)
+- 2 ways of handling input
+  - Use onChanged on an input widget
+  - Use Controller, e.g. TextEditingController()
+    - Make sure to call controller.dispose() in lifecycle dispose() which is only avail in StatefulWidget
+
+<br>
+
 # AppBar
  - Bar at the top of the screen
 
