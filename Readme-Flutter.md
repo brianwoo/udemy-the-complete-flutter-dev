@@ -336,6 +336,16 @@ showDialog(
   },
 );
 ```
+
+```dart
+showModalBottomSheet(
+  isScrollControlled: true,    // This makes sure the keyboard does not block the dialog
+  context: context,
+  builder: (ctx) => NewExpense(addExpense),
+);
+```
+
+
  <br>
 
 # GestureDector
