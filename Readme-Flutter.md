@@ -225,7 +225,11 @@ Column(
 - To customize the button style, use styleFrom()
   
 ```dart
-ElevatedButton(onPressed: () {}, child: Text("Answer 1"), ElevatedButton.styleForm(...)),
+ElevatedButton(
+  onPressed: () {},
+  child: Text("Answer 1"),
+  style: ElevatedButton.styleForm(...),
+),
 ```
 
 <br>
