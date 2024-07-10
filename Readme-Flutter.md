@@ -173,6 +173,14 @@ fonts:
 
 <br>
 
+# Column (As Parent), ListView (As a Child) & Unbounded height error
+- Flutter layout algorithm is a single-pass (to be efficient and save battery)
+- A parent widget sets a boundary constraint, its child can request for a size within the constraint.
+- PROBLEM: Column DOES NOT has this constraint, it allows its children to set a size and ListView asks for an infinite height.
+- [Unbounded height/width - YouTube](https://www.youtube.com/watch?v=jckqXR5CrPI)
+
+<br>
+
 # SizedBox
 - SizedBox covers the total size of the enclosed components
 - Put an invisible box to occupy empty space
