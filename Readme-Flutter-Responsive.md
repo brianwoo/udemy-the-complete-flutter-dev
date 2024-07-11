@@ -42,6 +42,6 @@ final height = MediaQuery.of(context).size.height;
   - Height: As much as needed by children
   - Width: As much as possible (INFINITY)
 
-Hence with Scaffold's constraints, Column and Row display fine
+Hence with Scaffold's constraints, Column and Row display fine, even Column wants height to be INFINITE
 
 
