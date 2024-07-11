@@ -65,3 +65,33 @@ With no constraint on height and child wants INFINITE height, Flutter throws an 
   - Height: As much as possible (INFINITY)
   - Width: As much as needed by children
 
+
+## SafeArea
+- Wrap Scaffold's body with SafeArea() to make sure Widget does NOT overlap with camera hole and notification bar
+- Set useSafeArea: true in ShowModalBottomSheet()
+```dart
+
+return Scaffold(
+  appBar: AppBar(
+    ...
+  ),
+  body: SafeArea(
+    child: Column(
+      children: [
+        Chart(expenses: _registeredExpenses),
+        Expanded(child: mainContent),
+      ],
+    ),
+  ),
+);
+
+void _openAddExpenseOverlay() {
+  showModalBottomSheet(
+    useSafeArea: true,
+    isScrollControlled: true,
+    context: context,
+    builder: (ctx) => NewExpense(onAddExpense: _addExpense),
+  );
+}
+```
+  
