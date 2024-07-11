@@ -48,7 +48,7 @@ Hence with Scaffold's constraints, Column and Row display fine, even Column want
 - E.g. Column's (Parent) Constraints:
   - Height: No Constraint
   - Width: Available width from screen / remaining width from parent
-- E.g. ListView's (Child) Preferences:
+- E.g. Column / ListView's (Child) Preferences:
   - Height: As much as possible (INFINITY)
   - Width: As much as needed by children
 
