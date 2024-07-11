@@ -27,6 +27,9 @@ void main() {
 ```dart
 final width = MediaQuery.of(context).size.width;
 final height = MediaQuery.of(context).size.height;
+
+// viewInsets - To see space taken from overlaying component (e.g. keyboard) overlapping screen
+final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 ```
 
 ## Understanding Widget Size Constraints (Academind explains)
