@@ -44,14 +44,21 @@ final height = MediaQuery.of(context).size.height;
 
 Hence with Scaffold's constraints, Column and Row display fine, even Column wants height to be INFINITE and Row wants width to be INFINITE.
 
-### Problem: when Parent has no constraint and Child wants INFINITE width or height
-- E.g. Column's Constraints:
+### Problem: When Parent has no constraint and Child wants INFINITE width or height
+- E.g. Column's (Parent) Constraints:
   - Height: No Constraint
-  - Width: Available width
-- E.g. ListView's Preferences:
+  - Width: Available width from screen / remaining width from parent
+- E.g. ListView's (Child) Preferences:
   - Height: As much as possible (INFINITY)
   - Width: As much as needed by children
 
 With no constraint on height and child wants INFINITE height, Flutter throws an Exception or out of the boundary of the screen.
 
+### To Fix: Add Expanded to set constraints of the Child
+- E.g. Expanded's (Parent) Constraints:
+  - Height: Actual height of the Child
+  - Width: Available width from screen / remaining width from parent
+- E.g. ListView's (Child) Preferences:
+  - Height: As much as possible (INFINITY)
+  - Width: As much as needed by children
 
