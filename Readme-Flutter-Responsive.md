@@ -52,6 +52,6 @@ Hence with Scaffold's constraints, Column and Row display fine, even Column want
   - Height: As much as possible (INFINITY)
   - Width: As much as needed by children
 
-With no constraint on height and child wants INFINITE height, Flutter throws an Exception.
+With no constraint on height and child wants INFINITE height, Flutter throws an Exception or out of the boundary of the screen.
 
 
