@@ -4,6 +4,8 @@
 - Setup a Base Color Scheme - use ColorScheme.fromSeed()
 - From MaterialApp, setup ThemeData, use copyWith()
 - Override specific widget color as desired
+- onPrimaryContainer means foreground color, also the same for SecondaryContainer
+- primaryContainer means background color, same for onSecondaryContainer
 
 ```dart
 // Base ColorScheme
