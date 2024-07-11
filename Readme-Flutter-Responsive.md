@@ -22,3 +22,9 @@ void main() {
   );
 }
 ```
+
+## MediaQuery - Get Device's Width & Height
+```dart
+final width = MediaQuery.of(context).size.width;
+final height = MediaQuery.of(context).size.height;
+```
