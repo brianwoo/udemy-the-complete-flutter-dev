@@ -20,8 +20,8 @@ void main() {
         theme: ThemeData().copyWith(
           colorScheme: kColorScheme,
           appBarTheme: const AppBarTheme().copyWith(
-            backgroundColor: kColorScheme.onPrimaryContainer,
-            foregroundColor: kColorScheme.primaryContainer,
+            backgroundColor: kColorScheme.primaryContainer,
+            foregroundColor: kColorScheme.onPrimaryContainer,
           ),
           cardTheme: const CardTheme().copyWith(
             color: kColorScheme.secondaryContainer,
@@ -72,4 +72,48 @@ Container(
 ),
 ```
 
+## Light / Dark Modes
+```dart
+
+// Define a dark ColorScheme, NOTE: make sure brightness is set to dark
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 37, 6, 17),
+);
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: MaterialApp(
+
+        // ThemeMode to follow system
+        themeMode: ThemeMode.system,
+
+        // Add Dark mode theme
+        darkTheme: ThemeData.dark().copyWith(
+          colorScheme: kDarkColorScheme,
+          cardTheme: const CardTheme().copyWith(
+            color: kDarkColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+          ),
+        ),
+
+        // The Light mode theme from previous section
+        theme: ThemeData().copyWith(
+          colorScheme: kColorScheme,
+          appBarTheme: const AppBarTheme().copyWith(
+            backgroundColor: kColorScheme.primaryContainer,
+            foregroundColor: kColorScheme.onPrimaryContainer,
+          ),
+          cardTheme: const CardTheme().copyWith(
+            ...
+            ...
+          ),
+        ),
+     );
+}
+```
 
