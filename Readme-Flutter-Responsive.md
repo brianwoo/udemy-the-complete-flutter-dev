@@ -94,4 +94,64 @@ void _openAddExpenseOverlay() {
   );
 }
 ```
-  
+
+## LayoutBuilder
+- LayoutBuilder can be used to build dynamic layout for different screen sizes
+```dart
+@override
+  Widget build(BuildContext context) {
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+
+        // We can query different constraints values
+        final width = constraints.maxWidth;
+
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                // Dart supports if condition, but no curly brackets
+                if (width > 600)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _titleController,
+                          maxLength: 50,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            label: Text('Title'),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 25.0),
+                          child: TextField(
+                            controller: _amountController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              prefixText: '\$',
+                              label: Text('Amount'),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                else
+                  Column()
+            ),
+          ),
+        );
+      },
+    );
+  }
+            
+```
