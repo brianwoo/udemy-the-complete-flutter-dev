@@ -352,7 +352,7 @@ showModalBottomSheet(
 
  <br>
 
-# GestureDector
+# GestureDector / InkWell
 - To detect user input (e.g. property onTap, onDoubleTap, etc)
 
 <br>
