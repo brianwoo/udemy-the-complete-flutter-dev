@@ -35,7 +35,7 @@ void main() {
           ),
           textTheme: ThemeData().textTheme.copyWith(
                 titleLarge: TextStyle(
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   color: kColorScheme.onSecondaryContainer,
                   fontSize: 15,
                 ),
@@ -47,6 +47,27 @@ void main() {
   );
 }
 
+```
+
+## To Use / Override Theme Settings
+- Use Theme.of(context).xxxx
+  
+```dart
+// Copy from textTheme titleLarge, but only override to Italic
+Text(
+  expense.title,
+  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        fontStyle: FontStyle.italic,
+      ),
+),
+
+// Use the base colorScheme and cardTheme.margin.horizontal
+Container(
+  color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+  margin: EdgeInsets.symmetric(
+    horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+  ),
+),
 ```
 
 
