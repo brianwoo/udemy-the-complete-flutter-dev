@@ -155,3 +155,13 @@ void _openAddExpenseOverlay() {
   }
             
 ```
+
+## Check Platform (Android, iOS, etc.)
+```
+if (Platform.isIOS) {
+  showCupertinoDialog(...);
+} else {
+  showDialog(...);
+}
+
+```
