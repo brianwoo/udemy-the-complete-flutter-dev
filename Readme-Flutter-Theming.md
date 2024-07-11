@@ -119,3 +119,9 @@ void main() {
 }
 ```
 
+## Determine if System Is Running in Dark Mode
+```dart
+final isDarkMode =
+    MediaQuery.of(context).platformBrightness == Brightness.dark;
+```
+
