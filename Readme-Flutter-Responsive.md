@@ -157,7 +157,7 @@ void _openAddExpenseOverlay() {
 ```
 
 ## Check Platform (Android, iOS, etc.)
-```
+```dart
 if (Platform.isIOS) {
   showCupertinoDialog(...);
 } else {
