@@ -73,6 +73,8 @@ Container(
 ```
 
 ## Light / Dark Modes
+- Toggle Dark/Light Theme from System Settings
+  
 ```dart
 
 // Define a dark ColorScheme, NOTE: make sure brightness is set to dark
@@ -86,7 +88,7 @@ void main() {
     MaterialApp(
       home: MaterialApp(
 
-        // ThemeMode to follow system
+        // ThemeMode here set to follow system, can also default to light or dark
         themeMode: ThemeMode.system,
 
         // Add Dark mode theme
