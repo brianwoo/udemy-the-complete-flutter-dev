@@ -79,6 +79,26 @@ class _HomePageState extends State<HomePage> {
 
 <br>
 
+# Text
+- Display a text on screen
+```dart
+// Some useful attributes
+Text(
+  meal.title,
+  maxLines: 2,
+  textAlign: TextAlign.center,
+  softWrap: true,
+  overflow: TextOverflow.ellipsis,
+  style: const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  ),
+),
+```
+
+<br>
+
 # Images
 
 ## Loading local images
