@@ -439,7 +439,7 @@ Navigator.of(context).pop();
   - canPop: if set to FALSE, it will not pop even the back button (or back gesture) is pressed.
     - onPopInvoked callback will be called when back button is pressed (Android only), iOS onPopInvoked not called
     - onPopInvoked callback will be called when programmatically pop() is called (Android & iOS)
-  - pop() accept an argument to pass back to caller
+  - pop() accept an argument to pass back data to caller
     
 ```dart
 PopScope(
