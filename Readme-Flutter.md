@@ -79,7 +79,9 @@ class _HomePageState extends State<HomePage> {
 
 <br>
 
-# Loading local images
+# Images
+
+## Loading local images
 - Use AssetImage class in code
 - Create an assets directory for images (e.g. assets/images) under the root of the project
 - Add to pubspec.yaml
@@ -94,7 +96,15 @@ flutter:
 ```
 <br>
 
-# Loading network images
+## Loading memory images
+- Use MemoryImage()
+```dart
+// In conjunction with the dart transparent_image package
+MemoryImage(kTransparentImage)
+```
+<br>
+
+## Loading network images
 - Use NetworkImage()
 ```dart
 Widget _coinImageWidget(String imgUrl) {
@@ -106,6 +116,16 @@ Widget _coinImageWidget(String imgUrl) {
     ),
   );
 }
+```
+<br>
+
+## FadeInImage
+- Image is faded in during loading
+```dart
+FadeInImage(
+  placeholder: MemoryImage(kTransparentImage),
+  image: NetworkImage(meal.imageUrl),
+)
 ```
 <br>
 
