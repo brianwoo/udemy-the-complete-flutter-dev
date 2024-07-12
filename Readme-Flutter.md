@@ -415,8 +415,10 @@ showModalBottomSheet(
 
 <br>
 
-# Go to another page
-- Use Navigator.push()
+# Multi-page Navigation
+## Go to another page (Push)
+- Use Navigator.push() - Push a new page on stack
+- Use Navigator.pushReplacement() - Push a new page to replace the current page
 
 ```dart
 GestureDetector(
@@ -427,6 +429,41 @@ GestureDetector(
     ),
   ),
 )
+```
+## Return from Push
+- Use Navigator.pop() to return to previous page
+```dart
+Navigator.of(context).pop();
+```
+- Alternatively, can setup a PopScope to better handle pop
+  - canPop: if set to FALSE, it will not pop even the back button (or back gesture) is pressed.
+    - onPopInvoked callback will be called when back button is pressed (Android only), iOS onPopInvoked not called
+    - onPopInvoked callback will be called when programmatically pop() is called (Android & iOS)
+  - pop() accept an argument to pass back to caller
+    
+```dart
+PopScope(
+  canPop: false,
+  onPopInvoked: (didPop) {
+    if (didPop) return;
+    Navigator.of(context).pop({
+      Filter.glutenFree: _glutenFreeFilterSet,
+      Filter.lactoseFree: _lactoseFreeFilterSet,
+      Filter.vegetarian: _vegetarianFilterSet,
+      Filter.vegan: _veganFilterSet,
+    });
+  },
+  child: ....
+
+// Caller (push)
+Navigator.of(context).push<Map<Filter, bool>>(
+  MaterialPageRoute(builder: (context) {
+    return const FiltersScreen();
+  }),
+).then((value) {
+  // Value from pop returned from this async function.
+  print(value);
+});
 ```
 
 <br>
