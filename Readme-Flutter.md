@@ -224,10 +224,23 @@ Column(
 # FittedBox
 <br>
 
-# Stack
+# Stack / Positioned
 - Stack is used to create a new layer on top of the screen (e.g. one widget on top of another widget)
 - The first widget added to the Stack will first display on the screen, the second widget added will display on top of the first widget, so on and so forth
-
+- Tips: Use Positioned() to control the placing of overlaying widget
+```dart
+Stack(
+  children: [
+    NetworkImage(meal.imageUrl),    
+    Positioned(
+      bottom: 0,
+      left: 0,
+      right: 50,
+      child: Text(meal.title),
+    ),
+  ],
+)
+```
 <br>
 
 # Align
