@@ -145,6 +145,11 @@ Widget _coinImageWidget(String imgUrl) {
 FadeInImage(
   placeholder: MemoryImage(kTransparentImage),
   image: NetworkImage(meal.imageUrl),
+  // BoxFit.cover to make sure the image is not distorted
+  // Image is covering within the bounds of the parent widget
+  fit: BoxFit.cover,
+  height: 200,
+  width: double.infinity,
 )
 ```
 <br>
