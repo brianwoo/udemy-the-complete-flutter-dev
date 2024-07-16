@@ -15,7 +15,7 @@ void main() {
 }
 ```
 
-## Create a Provider 
+## Create a Provider (Provider is for STATIC data)
 - Add Flutter Riverpod Snippet Extension from Robert Brunhage
 ```
 // Use snippet - type: provider
@@ -23,6 +23,38 @@ final mealsProvider = Provider<List<Meal>>((ref) {
   return dummyMeals;
 });
 ```
+
+## Create a StateNotifierProvider (StateNotifierProvider is for CHANGABLE data)
+- Add the StateNotifierProvider & StateNotifier boilerplate code
+```
+// Use snippet - type: stateNotifier
+class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
+
+  // Initial state stored through super constructor
+  FavoriteMealsNotifier() : super([]);
+
+  // Method to change state
+  // NOTE: always create a new object (list in this case)
+  void toggleMealFavoriteStatus(Meal meal) {
+    final isMealFavorite = state.contains(meal);
+
+    if (isMealFavorite) {
+      state = state.where((m) => m.id != meal.id).toList();
+    } else {
+      state = [...state, meal];
+    }
+  }
+}
+
+// Use snippet - type: stateNotifierProvider
+final favoriteMealsProvider =
+    StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>(
+  (ref) {
+    return FavoriteMealsNotifier();
+  },
+);
+```
+
 
 ## Create Access to Provider
 - Access Provider by ref
