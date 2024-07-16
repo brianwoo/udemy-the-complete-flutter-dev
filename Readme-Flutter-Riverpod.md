@@ -17,7 +17,7 @@ void main() {
 
 ## Create a Provider (Provider is for STATIC data)
 - Add Flutter Riverpod Snippet Extension from Robert Brunhage
-```
+```dart
 // Use snippet - type: provider
 final mealsProvider = Provider<List<Meal>>((ref) {
   return dummyMeals;
