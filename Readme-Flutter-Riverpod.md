@@ -78,6 +78,8 @@ final favoriteMealsProvider =
 
 ## Access to Provider
 - Access Provider by ref
+  - ref.read(): will only read the value ONCE
+  - ref.watch(): will monitor and read the value when changed
 ```dart
 @override
   Widget build(BuildContext context) {
