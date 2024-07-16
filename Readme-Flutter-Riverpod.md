@@ -40,7 +40,7 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 ```
 
 ## Create a Consumer - Stateful Widget
-- Use stfulConsumer
+- Use snippet: stfulConsumer
 
   
 
