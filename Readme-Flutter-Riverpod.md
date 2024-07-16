@@ -75,7 +75,7 @@ final favoriteMealsProvider =
 <hr>
 <br>
 
-## Create Access to Provider
+## Access to Provider
 - Access Provider by ref
 ```dart
 @override
@@ -87,6 +87,19 @@ final favoriteMealsProvider =
           m.isVegetarian == _selectedFilters[Filter.vegetarian] &&
           m.isVegan == _selectedFilters[Filter.vegan];
     }).toList();
+}
+```
+
+## Access to Notifier
+- Access Notifier by ref.read(provider.notifier)
+```dart
+Widget build(BuildContext context, WidgetRef ref) {
+  return IconButton(
+            onPressed: () => ref
+                .read(favoriteMealsProvider.notifier)
+                .toggleMealFavoriteStatus(meal),
+            icon: const Icon(Icons.star),
+          );
 }
 ```
 
