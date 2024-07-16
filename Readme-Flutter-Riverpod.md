@@ -71,6 +71,7 @@ final favoriteMealsProvider =
 - Use snippet: stlessConsumer
 - If change from StatelessWidget
   - StatelessWidget -> ConsumerWidget
+  - build(BuildContext ctx) -> build(BuildContext ctx, WidgetRef ref)
  
 <hr>
 <br>
