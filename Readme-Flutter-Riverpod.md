@@ -14,8 +14,9 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 ```
+## Providers
 
-## Create a Provider (Provider is for STATIC data)
+### Create a Provider (Provider is for STATIC data)
 - Add Flutter Riverpod Snippet Extension from Robert Brunhage
 ```dart
 // Use snippet - type: provider
@@ -24,7 +25,7 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 });
 ```
 
-## Create a StateNotifierProvider (StateNotifierProvider is for CHANGABLE data)
+### Create a StateNotifierProvider (StateNotifierProvider is for CHANGABLE data)
 - Add the StateNotifierProvider & StateNotifier boilerplate code
 ```dart
 // Use snippet - type: stateNotifier
