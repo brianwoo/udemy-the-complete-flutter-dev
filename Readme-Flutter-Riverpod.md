@@ -57,7 +57,23 @@ final favoriteMealsProvider =
 ```
 
 <hr>
+<br>
 
+## Consumer
+
+### Create a Consumer - Stateful Widget
+- Use snippet: stfulConsumer
+- Change from StatefulWidget
+  - StatefulWidget -> ConsumerStatefulWidget
+  - State -> ConsumerState
+
+### Create a Consumer - Stateless Widget
+- Use snippet: stlessConsumer
+- Change from StatelessWidget
+  - StatelessWidget -> ConsumerWidget
+ 
+<hr>
+<br>
 
 ## Create Access to Provider
 - Access Provider by ref
@@ -74,11 +90,5 @@ final favoriteMealsProvider =
 }
 ```
 
-## Create a Consumer - Stateful Widget
-- Use snippet: stfulConsumer
-- Change from StatefulWidget
-  - StatefulWidget -> ConsumerStatefulWidget
-  - State -> ConsumerState
 
-  
 
