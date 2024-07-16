@@ -56,6 +56,8 @@ final favoriteMealsProvider =
 );
 ```
 
+<hr>
+
 
 ## Create Access to Provider
 - Access Provider by ref
