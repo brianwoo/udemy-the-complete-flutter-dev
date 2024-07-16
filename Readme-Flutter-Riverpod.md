@@ -59,17 +59,17 @@ final favoriteMealsProvider =
 <hr>
 <br>
 
-## Consumer
+## Consumers
 
-### Create a Consumer - Stateful Widget
+### Create a ConsumerStatefulWidget
 - Use snippet: stfulConsumer
-- Change from StatefulWidget
+- If change from StatefulWidget
   - StatefulWidget -> ConsumerStatefulWidget
   - State -> ConsumerState
 
-### Create a Consumer - Stateless Widget
+### Create a ConsumerWidget
 - Use snippet: stlessConsumer
-- Change from StatelessWidget
+- If change from StatelessWidget
   - StatelessWidget -> ConsumerWidget
  
 <hr>
