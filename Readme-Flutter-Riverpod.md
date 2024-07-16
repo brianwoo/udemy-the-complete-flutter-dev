@@ -24,10 +24,8 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 });
 ```
 
-## Create a Consumer - Stateful Widget
-- Use stfulConsumer
+## Create Access to Provider
 - Access Provider by ref
-  
 ```dart
 @override
   Widget build(BuildContext context) {
@@ -40,3 +38,9 @@ final mealsProvider = Provider<List<Meal>>((ref) {
     }).toList();
 }
 ```
+
+## Create a Consumer - Stateful Widget
+- Use stfulConsumer
+
+  
+
