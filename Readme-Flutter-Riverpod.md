@@ -26,7 +26,7 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 
 ## Create a StateNotifierProvider (StateNotifierProvider is for CHANGABLE data)
 - Add the StateNotifierProvider & StateNotifier boilerplate code
-```
+```dart
 // Use snippet - type: stateNotifier
 class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
 
