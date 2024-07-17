@@ -106,5 +106,21 @@ Widget build(BuildContext context, WidgetRef ref) {
 }
 ```
 
+## Provider depends on another Provider
+- it's possible to do it like React Hook where a Hook depends on a value change
+```dart
+final filteredMealProvider = Provider<List<Meal>>((ref) {
+  // depending on filtersProvider
+  final filters = ref.watch(filtersProvider);
+
+  // depending on mealsProvider
+  return ref.watch(mealsProvider).where((m) {
+    return m.isGlutenFree == filters[Filter.glutenFree] &&
+        m.isLactoseFree == filters[Filter.lactoseFree] &&
+        m.isVegetarian == filters[Filter.vegetarian] &&
+        m.isVegan == filters[Filter.vegan];
+  }).toList();
+});
+```
 
 
