@@ -132,3 +132,38 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 }
 ```
 
+## Hero - Animations between 2 screens (Implicit Animations)
+- Use Hero() on 2 widgets with the same tag between 2 screens
+```dart
+// meal_item.dart
+@override
+Widget build(BuildContext context) {
+  return Card(
+    child: Hero(
+      // Using the same meal.id as tag
+      tag: meal.id,    
+      child: NetworkImage(meal.imageUrl),
+    ),
+  );
+}
+
+// meal_details.dart
+@override
+Widget build(BuildContext context) {
+  return Column(
+          children: [
+            Hero(
+              // Using the same meal.id as tag
+              tag: meal.id,  
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(meal.imageUrl),
+                fit: BoxFit.cover,
+                height: 300,
+                width: double.infinity,
+              ),
+            ),
+          ],
+  );
+}
+```
