@@ -53,3 +53,23 @@ class _CategoriesScreenState extends State<CategoriesScreen>
   }
 }
 ```
+
+### Build & AnimatedBuilder
+```dart
+@override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      // XyzWidget is pre-setup to pass into the builder function (child arg)
+      child: XyzWidget(),
+      // builder function will be executed 60fps to output the animations
+      builder: (context, child) => Padding(
+        padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
+        child: child,
+      ),
+    );
+  }
+```
+
+<hr>
+<br>
