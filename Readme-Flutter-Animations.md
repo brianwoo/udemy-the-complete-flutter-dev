@@ -135,6 +135,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 ## Hero - Animations between 2 screens (Implicit Animations)
 - Use Hero() on 2 widgets with the same tag between 2 screens
 ```dart
+// Transition between meal_item to meal_details screens
+
 // meal_item.dart
 @override
 Widget build(BuildContext context) {
