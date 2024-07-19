@@ -10,6 +10,13 @@
  
 
 ## Explicit Animations
+Classes
+- AnimatedBuilder
+  - a special Animation object that generates a new value whenever the hardware is ready for a new frame.
+- Animation<double> / CurveAnimation, Animation<Color>, Animation<Size>, etc.
+  - interpolating numbers between two values over a certain duration.
+- Tween
+  - By default, the AnimationController object ranges from 0.0 to 1.0. If you need a different range or a different data type, you can use a Tween to configure an animation to interpolate to a different range or data type. E.g. Offset(x,y)
 ### Boilerplate code setup
 
 ```dart
