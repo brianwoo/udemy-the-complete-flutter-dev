@@ -104,3 +104,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
 <hr>
 <br>
+
+## Implicit Animations
+
+
