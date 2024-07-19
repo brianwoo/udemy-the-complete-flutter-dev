@@ -106,5 +106,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 <br>
 
 ## Implicit Animations
+- [Animated Widgets for Implicit Animations](https://docs.flutter.dev/ui/widgets/animation)
 
 
