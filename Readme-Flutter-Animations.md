@@ -109,7 +109,6 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 - [Animated Widgets for Implicit Animations](https://docs.flutter.dev/ui/widgets/animation)
 
 ### Boilerplate code setup
-- Implicit Animations can be implemented by a StatelessWidget
 ```dart
 @override
   Widget build(BuildContext context, WidgetRef ref) {
