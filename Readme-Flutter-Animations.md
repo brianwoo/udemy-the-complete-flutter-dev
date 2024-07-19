@@ -63,6 +63,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       // XyzWidget is pre-setup to pass into the builder function (child arg)
       child: XyzWidget(),
       // builder function will be executed 60fps to output the animations
+      // _animationController.value will go from 0 - 1, within 300ms (as we setup)
       builder: (context, child) => Padding(
         padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
         child: child,
