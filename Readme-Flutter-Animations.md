@@ -64,8 +64,36 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       child: XyzWidget(),
       // builder function will be executed 60fps to output the animations
       // _animationController.value will go from 0 - 1, within 300ms (as we setup)
+      // NOTE: Sliding up like this DOES NOT provide the smoothest experience
+      // Use SlideTransition() instead.
       builder: (context, child) => Padding(
         padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
+        child: child,
+      ),
+    );
+  }
+
+// SlideTransition Example
+@override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      // XyzWidget is pre-setup to pass into the builder function (child arg)
+      child: XyzWidget(),
+      // builder function will be executed 60fps to output the animations
+      builder: (context, child) => SlideTransition(
+        position: Tween(
+          // offset: x,y (goes between 0 - 1)
+          // 0.3 means 30%, and in the y axis (30% down)
+          begin: const Offset(0, 0.3),
+          end: const Offset(0, 0),
+        ).animate(
+          // Curves provides different type of animation options
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInQuart,
+          ),
+        ),
         child: child,
       ),
     );
