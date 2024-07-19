@@ -117,6 +117,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
 ## Implicit Animations
 - [Animated Widgets for Implicit Animations](https://docs.flutter.dev/ui/widgets/animation)
+- [AnimatedSwitcher](https://www.youtube.com/watch?v=2W7POjFb88g)
 
 ### Boilerplate code setup
 ```dart
