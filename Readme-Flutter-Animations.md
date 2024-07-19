@@ -108,4 +108,28 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 ## Implicit Animations
 - [Animated Widgets for Implicit Animations](https://docs.flutter.dev/ui/widgets/animation)
 
+### Boilerplate code setup
+- Implicit Animations can be implemented by a StatelessWidget
+```dart
+@override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    return IconButton(
+            onPressed: () { ... },
+            // AnimatedSwitcher switches child
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return RotationTransition(
+                  turns: Tween(begin: 0.5, end: 1.0).animate(animation),
+                  child: child,
+                );
+              },
+              child: isFavorite
+                  ? const Icon(Icons.star, key: ValueKey(0))
+                  : const Icon(Icons.star_border, key: ValueKey(1)),
+            ),
+          );
+}
+```
 
