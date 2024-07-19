@@ -134,6 +134,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   child: child,
                 );
               },
+              // IMPORTANT: use unique key on widget for animation to work
               child: isFavorite
                   ? const Icon(Icons.star, key: ValueKey(0))
                   : const Icon(Icons.star_border, key: ValueKey(1)),
