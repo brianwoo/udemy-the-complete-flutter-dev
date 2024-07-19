@@ -1,4 +1,5 @@
 # Animations
+- [Widget Animations](https://docs.flutter.dev/ui/widgets/animation)
 - Explicit Animations
   - You control the entire animation
   - More control but also more complexity
@@ -116,7 +117,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 <br>
 
 ## Implicit Animations
-- [Animated Widgets for Implicit Animations](https://docs.flutter.dev/ui/widgets/animation)
+- [Implictly Animated Widgets](https://api.flutter.dev/flutter/widgets/ImplicitlyAnimatedWidget-class.html)
 - [AnimatedSwitcher](https://www.youtube.com/watch?v=2W7POjFb88g)
 
 ### Boilerplate code setup
