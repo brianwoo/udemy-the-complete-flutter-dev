@@ -55,7 +55,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 ```
 
 ### Build & AnimatedBuilder
+- For AnimatedBuilder, use XxxTransition and Curves.xxxx options for much better results
 ```dart
+// Basic Example (Not optimized)
 @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -65,7 +67,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       // builder function will be executed 60fps to output the animations
       // _animationController.value will go from 0 - 1, within 300ms (as we setup)
       // NOTE: Sliding up like this DOES NOT provide the smoothest experience
-      // Use SlideTransition() instead.
+      // Use XxxTransition() instead.
       builder: (context, child) => Padding(
         padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
         child: child,
@@ -73,7 +75,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     );
   }
 
-// SlideTransition Example
+// SlideTransition Example (Optimized, use this)
 @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
