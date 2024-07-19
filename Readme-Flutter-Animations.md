@@ -30,11 +30,19 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 30),
+      duration: const Duration(milliseconds: 300),
       // animation goes from the value set by lowerBound to upperBound
       lowerBound: 0,
       upperBound: 1,
     );
+
+    // start the animation
+    _animationController.forward();
+
+    // animation controller also has stop and repeat
+    // _animationController.stop();
+    // _animationController.repeat();
+
   }
 
   // dispose to avoid a memory leak
