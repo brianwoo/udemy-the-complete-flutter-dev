@@ -22,8 +22,7 @@
               initialValue: '1',
             ),
             DropdownButtonFormField(
-              items: categories.entries
-                      .map(....).toList(),
+              items: categories.entries.map(....).toList(),
               onChanged: (value) {},
             ),
           ],
