@@ -21,6 +21,7 @@
             TextFormField(
               decoration: const InputDecoration(label: Text('Quantity')),
               initialValue: '1',
+              keyboardType: TextInputType.number,
             ),
             DropdownButtonFormField(
               items: categories.entries.map(....).toList(),
