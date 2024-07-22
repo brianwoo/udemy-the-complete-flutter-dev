@@ -2,7 +2,6 @@
 - Form Widget is available
 - Form input widgets which provide extra functionality than regular input widgets
   - E.g. TextFormField vs TextField
-- Validator functions will be executed only when a Form is submitted
  
 ```dart
 @override
@@ -37,6 +36,7 @@
 - if validator function:
   - Input value parameter fails validation, return a non-null string (as an error msg)
   - Input value parameter passes validation, return null
+- Validator functions will be executed only when a Form is submitted
 ```dart
  TextFormField(
   maxLength: 50,
