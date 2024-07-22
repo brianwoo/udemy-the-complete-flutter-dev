@@ -31,3 +31,24 @@
     );
   }
 ```
+
+## Validators
+- if validator function:
+  - Input value parameter fails validation, return a non-null string (as an error msg)
+  - Input value parameter passes validation, return null
+```dart
+ TextFormField(
+  maxLength: 50,
+  decoration: const InputDecoration(label: Text('Name')),
+  validator: (value) {
+    if (value == null ||
+        value.isEmpty ||
+        value.trim().length <= 1 ||
+        value.trim().length > 50) {
+      return 'Must be between 1 to 50 chars.';
+    }
+    return null;
+  },
+);
+```
+
