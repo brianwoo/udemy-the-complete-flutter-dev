@@ -48,8 +48,11 @@ class _NewItemState extends ... {
   final _formKey = GlobalKey<FormState>();
   
   void _saveItem() {
-    // form validator methods will be executed when validate() is called
     final isValidated = _formKey.currentState!.validate();
+
+    if (isValidated) {
+      _formKey.currentState!.save();
+    }
   }
   
   @override
