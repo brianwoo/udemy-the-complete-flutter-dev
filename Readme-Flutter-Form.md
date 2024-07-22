@@ -41,42 +41,46 @@
 - Validator functions will be executed only when _formKey.currentState!.validate() is called
 ```dart
 
-// Use GlobalKey to setup a key for the form.
-final _formKey = GlobalKey<FormState>();
-
-void _saveItem() {
-  // form validator methods will be executed when validate() is called
-  final isValidated = _formKey.currentState!.validate();
-}
-
-@override
-Widget build(BuildContext context) {
-  return TextFormField(
-    maxLength: 50,
-    decoration: const InputDecoration(label: Text('Name')),
-    validator: (value) {
-      if (value == null ||
-          value.isEmpty ||
-          value.trim().length <= 1 ||
-          value.trim().length > 50) {
-        return 'Must be between 1 to 50 chars.';
-      }
-      return null;
-    },
-  );
-
-  // Save and validate
-  ElevatedButton(
-    onPressed: _saveItem,
-    child: const Text('Add Item'),
-  );
-
-  // RESET the form
-  TextButton(
-    onPressed: () => _formKey.currentState!.reset(),
-    child: const Text('Reset'),
-  );
-
+class _NewItemState extends ... {
+  
+  
+  // Use GlobalKey to setup a key for the form.
+  final _formKey = GlobalKey<FormState>();
+  
+  void _saveItem() {
+    // form validator methods will be executed when validate() is called
+    final isValidated = _formKey.currentState!.validate();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLength: 50,
+      decoration: const InputDecoration(label: Text('Name')),
+      validator: (value) {
+        if (value == null ||
+            value.isEmpty ||
+            value.trim().length <= 1 ||
+            value.trim().length > 50) {
+          return 'Must be between 1 to 50 chars.';
+        }
+        return null;
+      },
+    );
+  
+    // Save and validate
+    ElevatedButton(
+      onPressed: _saveItem,
+      child: const Text('Add Item'),
+    );
+  
+    // RESET the form
+    TextButton(
+      onPressed: () => _formKey.currentState!.reset(),
+      child: const Text('Reset'),
+    );
+  
+  }
 }
 ```
 
