@@ -2,6 +2,7 @@
 - Form Widget is available
 - Form input widgets which provide extra functionality than regular input widgets
   - E.g. TextFormField vs TextField
+- Validator functions will be executed only when a Form is submitted
  
 ```dart
 @override
