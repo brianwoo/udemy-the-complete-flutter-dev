@@ -46,13 +46,18 @@ class _NewItemState extends ... {
   
   // Use GlobalKey to setup a key for the form.
   final _formKey = GlobalKey<FormState>();
+  late String? _enteredName;
   
   void _saveItem() {
+    // triggers validator function to be called
     final isValidated = _formKey.currentState!.validate();
 
     if (isValidated) {
+      // triggers onSave function to be called
       _formKey.currentState!.save();
     }
+
+    print(_enteredName);
   }
   
   @override
@@ -60,6 +65,7 @@ class _NewItemState extends ... {
     return TextFormField(
       maxLength: 50,
       decoration: const InputDecoration(label: Text('Name')),
+      onSaved: (newValue) => _enteredName = newValue,
       validator: (value) {
         if (value == null ||
             value.isEmpty ||
