@@ -75,7 +75,7 @@ Widget build(BuildContext context) {
       }
 
       if (snapshot.data!.isEmpty) {
-        const Center(child: Text('Your Grocery List is Empty'));
+        return const Center(child: Text('Your Grocery List is Empty'));
       }
 
       return ListView.builder(
