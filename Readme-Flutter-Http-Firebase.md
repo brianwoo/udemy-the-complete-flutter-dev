@@ -33,3 +33,8 @@ final response = await http.get(url);
 Map<String, dynamic> listData = jsonDecode(response.body);
 
 ```
+
+## DELETE Request
+```dart
+final response = await http.delete(url);
+```
