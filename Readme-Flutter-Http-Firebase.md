@@ -6,7 +6,12 @@
 ```dart
 import 'package:http/http.dart' as http;
 
-http.post(
+final url = Uri.https(
+  'flutter-prep-12345-default-rtdb.firebaseio.com',
+  'shopping-list.json',
+);
+
+final response = await http.post(
   url,
   headers: {
     'Content-Type': 'application/json',
@@ -19,4 +24,12 @@ http.post(
     },
   ),
 );
+```
+
+## GET Request
+```dart
+final response = await http.get(url);
+
+Map<String, dynamic> listData = jsonDecode(response.body);
+
 ```
