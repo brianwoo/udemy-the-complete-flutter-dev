@@ -38,3 +38,68 @@ Map<String, dynamic> listData = jsonDecode(response.body);
 ```dart
 final response = await http.delete(url);
 ```
+
+## FutureBuilder with GET
+```
+Future<List<GroceryItem>> _loadItems() async {
+
+  // if there is no network connection, get() will throw an exception
+  final response = await http.get(url);
+
+  // if we get a 4xx error, we throw an Exception, FutureBuilder's snapshot.hasError
+  // will be true.
+  if (response.statusCode >= 400) {
+    throw Exception('Failed to fetch grocery items. Please try again later.');
+  }
+
+  final listData = jsonDecode(response.body);
+  ... Turn listData into List<GroceryItem> ...
+  return loadedItems;
+}
+
+
+@override
+Widget build(BuildContext context) {
+  return FutureBuilder(
+    // _loadItems() returns a Future or an Exception
+    future: _loadItems(),
+    builder: (context, snapshot) {
+      // Still waiting for response...
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError) {
+        // snapshot.error will return the error from the Exception
+        return Center(child: Text(snapshot.error.toString()));
+      }
+
+      if (snapshot.data!.isEmpty) {
+        const Center(child: Text('Your Grocery List is Empty'));
+      }
+
+      return ListView.builder(
+        itemCount: snapshot.data!.length,
+        itemBuilder: (context, index) {
+          final itemList = snapshot.data!;
+
+          return Dismissible(
+            key: Key(itemList[index].id),
+            onDismissed: (direction) => _deleteItem(itemList[index]),
+            child: ListTile(
+              leading: Container(
+                height: 16,
+                width: 16,
+                color: itemList[index].category.color,
+              ),
+              title: Text(itemList[index].name),
+              trailing: Text(itemList[index].quantity.toString()),
+            ),
+          );
+        },
+      );
+    },
+  );
+}
+```
+
