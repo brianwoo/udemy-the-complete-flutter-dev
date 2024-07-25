@@ -53,7 +53,7 @@ Future<List<GroceryItem>> _loadItems() async {
   }
 
   final listData = jsonDecode(response.body);
-  ... Turn listData into List<GroceryItem> ...
+  // ... Turn listData into List<GroceryItem> ...
   return loadedItems;
 }
 
