@@ -40,7 +40,7 @@ final response = await http.delete(url);
 ```
 
 ## FutureBuilder with GET
-```
+```dart
 Future<List<GroceryItem>> _loadItems() async {
 
   // if there is no network connection, get() will throw an exception
