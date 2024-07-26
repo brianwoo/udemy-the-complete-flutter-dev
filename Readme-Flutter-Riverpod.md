@@ -14,6 +14,13 @@ void main() {
   runApp(const ProviderScope(child: App()));
 }
 ```
+
+- Next:
+  - add a Provider / Notifier to provide data & functions
+  - add a Consumer to access data & functions
+  
+<br>
+
 ## Providers
 
 ### Create a Provider (Provider is for STATIC data)
