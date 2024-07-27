@@ -39,7 +39,7 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
 
   // Initial state stored through super constructor
-  FavoriteMealsNotifier() : super([]);
+  FavoriteMealsNotifier() : super(const []);
 
   // Method to change state
   // NOTE: always create a new object (list in this case)
