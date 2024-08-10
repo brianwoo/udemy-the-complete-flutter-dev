@@ -223,6 +223,9 @@ fonts:
 - A parent widget sets a boundary constraint, its child can request for a size within the constraint.
 - PROBLEM: Column DOES NOT has this constraint, it allows its children to set a size and ListView asks for an infinite height.
 - [Unbounded height/width - YouTube](https://www.youtube.com/watch?v=jckqXR5CrPI)
+- SOLUTIONS:
+  - Use Expanded or Flexible if we want ListView to take up the rest of the space
+  - Use SizedBox if we want to control the size of the ListView
 
 <br>
 
