@@ -55,6 +55,7 @@ class FavoriteMealsNotifier extends Notifier<List<Meal>> {
 
   @override
   List<Meal> build() {
+    // initial value
     return [];
   }
 }
