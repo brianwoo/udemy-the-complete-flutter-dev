@@ -34,35 +34,35 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 
 ## SYNCHRONOUS Provider and Notifier
 
-### Create a StateNotifierProvider & StateNotifier (notifier is for CHANGABLE data)
-- Add the StateNotifierProvider & StateNotifier boilerplate code
+### Create a NotifierProvider & Notifier (notifier is for CHANGABLE data)
+- Add the NotifierProvider & Notifier boilerplate code
 ```dart
 // Use snippet - type: stateNotifier
-class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
+class FavoriteMealsNotifier extends Notifier<List<Meal>> {
 
-  // Initial state stored through super constructor
-  FavoriteMealsNotifier() : super(const []);
-
-  // Method to change state
   // NOTE: always create a new object (list in this case)
-  void toggleMealFavoriteStatus(Meal meal) {
+  bool toggleMealFavoriteStatus(Meal meal) {
     final isMealFavorite = state.contains(meal);
 
     if (isMealFavorite) {
       state = state.where((m) => m.id != meal.id).toList();
+      return false;
     } else {
       state = [...state, meal];
+      return true;
     }
+  }
+
+  @override
+  List<Meal> build() {
+    return [];
   }
 }
 
 // Use snippet - type: stateNotifierProvider
 final favoriteMealsProvider =
-    StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>(
-  (ref) {
-    return FavoriteMealsNotifier();
-  },
-);
+    NotifierProvider<FavoriteMealsNotifier, List<Meal>>(
+        () => FavoriteMealsNotifier());
 ```
 
 ## ASYNCHRONOUS Provider and Notifier
@@ -167,8 +167,8 @@ final placesProvider = AsyncNotifierProvider<PlacesNotifier, List<Place>>(() {
 <hr>
 <br>
 
-## Access to Provider
-- Access Provider by ref
+## Access to NotifierProvider / Provider
+- Access NotifierProvider by ref
   - ref.read(): will only read the value ONCE
   - ref.watch(): will monitor and read the value when changed. When a value has been changed, the build() method will get triggered to rebuild the widget tree. This can help eliminating the need for ConsumerStatefulWidget.
 ```dart
