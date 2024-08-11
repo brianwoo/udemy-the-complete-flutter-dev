@@ -32,7 +32,9 @@ final mealsProvider = Provider<List<Meal>>((ref) {
 });
 ```
 
-### Create a StateNotifierProvider (StateNotifierProvider is for CHANGABLE data)
+## SYNCHRONOUS Provider and Notifier
+
+### Create a StateNotifierProvider & StateNotifier (notifier is for CHANGABLE data)
 - Add the StateNotifierProvider & StateNotifier boilerplate code
 ```dart
 // Use snippet - type: stateNotifier
@@ -61,6 +63,88 @@ final favoriteMealsProvider =
     return FavoriteMealsNotifier();
   },
 );
+```
+
+## ASYNCHRONOUS Provider and Notifier
+
+### Create a AsyncNotifierProvider & AsyncNotifier (notifier is for CHANGABLE data)
+- boilerplate code:
+```dart
+// Use snippet - type: asyncNotifier
+class PlacesNotifier extends AsyncNotifier<List<Place>> {
+  ///
+  /// 2 Options to update the state and trigger a automatic reload in the UI:
+  ///
+
+  ///
+  /// Option 1: addPlaceAndUpdateLocalState
+  /// This method will NOT trigger the notifier.build() again
+  ///
+  /// Use case: the remote API (DB or REST API) returns a newly inserted obj.
+  ///
+  void addPlaceAndUpdateLocalState(Place newPlace) async {
+    final db = await _getDatabase();
+
+    db.insert('user_places', {
+      'id': newPlace.id,
+      'title': newPlace.title,
+    });
+
+    // We can then manually update the local cache. For this, we'll need to
+    // obtain the previous state.
+    // Caution: The previous state may still be loading or in error state.
+    // A graceful way of handling this would be to read `this.future` instead
+    // of `this.state`, which would enable awaiting the loading state, and
+    // throw an error if the state is in error state.
+    final previousState = await future;
+    state = AsyncData([...previousState, newPlace]);
+  }
+
+  ///
+  /// Option 2: addPlaceAndInvalidate()
+  /// This method WILL trigger the notifier.build() again
+  ///
+  /// Use case: the remote API (DB or REST API) DOES NOT return a newly
+  /// inserted obj. Notifier.build() will be called to pull data.
+  ///
+  void addPlaceAndInvalidate(Place newPlace) async {
+    final db = await _getDatabase();
+
+    db.insert('user_places', {
+      'id': newPlace.id,
+      'title': newPlace.title,
+    });
+
+    // Once the post request is done, we can mark the local cache as dirty.
+    // This will cause "build" on our notifier to asynchronously be called again,
+    // and will notify listeners when doing so.
+    ref.invalidateSelf();
+  }
+
+  ///
+  /// build() - this is called when:
+  /// 1. Initially to provide a initial value
+  /// 2. After ref.invalidateSelf() is called
+  @override
+  Future<List<Place>> build() async {
+    final db = await _getDatabase();
+    final data = await db.query('user_places');
+
+    final places = data
+        .map(
+          (row) => Place(
+            id: row['id'].toString(),
+            title: row['title'].toString(),
+          ),
+        )
+        .toList();
+    return places;
+  }
+}
+
+final placesProvider = AsyncNotifierProvider<PlacesNotifier, List<Place>>(() {
+  return PlacesNotifier();
+});
 ```
 
 <hr>
