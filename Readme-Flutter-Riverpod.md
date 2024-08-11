@@ -77,7 +77,7 @@ class PlacesNotifier extends AsyncNotifier<List<Place>> {
   ///
 
   ///
-  /// Option 1: addPlaceAndUpdateLocalState
+  /// Option 1: Update local state manually
   /// This method will NOT trigger the notifier.build() again
   ///
   /// Use case: the remote API (DB or REST API) returns a newly inserted obj.
@@ -101,7 +101,7 @@ class PlacesNotifier extends AsyncNotifier<List<Place>> {
   }
 
   ///
-  /// Option 2: addPlaceAndInvalidate()
+  /// Option 2: Use ref.invalidateSelf()
   /// This method WILL trigger the notifier.build() again
   ///
   /// Use case: the remote API (DB or REST API) DOES NOT return a newly
