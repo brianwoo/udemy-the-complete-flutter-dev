@@ -184,7 +184,35 @@ final placesProvider = AsyncNotifierProvider<PlacesNotifier, List<Place>>(() {
 }
 ```
 
-## Access to Notifier
+## Access to AsyncNotifierProvider
+- AsyncNotifierProvider returns an AsyncValue object
+- AsyncValue is NOT compatible with FutureBuilder, use:
+  - AsyncValue.data, AsyncValue.error, AsyncValue.loading instead
+```dart
+@override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final places = ref.watch(placesProvider);
+
+    return places.when(
+      data: (data) => ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {},
+            title: Text(
+              data[index].title,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        },
+      ),
+      error: (e, st) => Center(child: Text(e.toString())),
+      loading: () => const Center(child: CircularProgressIndicator()),
+    );
+  }
+```
+
+## Access to Notifier (To update a value)
 - Access Notifier by ref.read(provider.notifier)
 ```dart
 Widget build(BuildContext context, WidgetRef ref) {
@@ -196,6 +224,10 @@ Widget build(BuildContext context, WidgetRef ref) {
           );
 }
 ```
+
+
+
+
 
 ## Provider depends on another Provider
 - it's possible to do it like React Hook where a Hook depends on a value change
