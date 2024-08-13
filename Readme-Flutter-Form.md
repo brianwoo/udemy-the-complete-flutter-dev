@@ -35,9 +35,9 @@
 ```
 
 ## Validators
-- if validator function:
-  - Input value parameter fails validation, return a non-null string (as an error msg)
-  - Input value parameter passes validation, return null
+- Validator function:
+  - If input value parameter fails validation, return a non-null string (as an error msg)
+  - If input value parameter passes validation, return null
 - validator functions will be executed only when _formKey.currentState!.validate() is called
 - onSaved functions will be executed only when _formKey.currentState!.save() is called
 ```dart
