@@ -227,6 +227,8 @@ fonts:
   - Use Expanded or Flexible if we want ListView to take up the rest of the space
   - Use SizedBox if we want to control the size of the ListView
 
+- Similar problem also happens in Row (As Parent), TextField (As a Child). Solution: Add Expanded to enclose TextField
+  
 <br>
 
 # SizedBox
